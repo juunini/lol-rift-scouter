@@ -1,0 +1,40 @@
+{
+  "프로필 아이콘": "http://ddragon.leagueoflegends.com/cdn/10.18.1/img/profileicon/{profileIconId}.png",
+  "챔피언 리스트": "http://ddragon.leagueoflegends.com/cdn/10.18.1/data/ko_KR/champion.json",
+  "챔피언 초상화": "http://ddragon.leagueoflegends.com/cdn/10.18.1/img/champion/{champion}.png",
+  "미니맵 이미지": "http://ddragon.leagueoflegends.com/cdn/6.8.1/img/map/map{mapId}.png",
+  "스펠 리스트": "http://ddragon.leagueoflegends.com/cdn/10.18.1/data/ko_KR/summoner.json",
+  "스펠 이미지": "http://ddragon.leagueoflegends.com/cdn/10.18.1/img/spell/{spell name}.png",
+  "아이템 리스트" : "http://ddragon.leagueoflegends.com/cdn/10.18.1/data/ko_KR/item.json",
+  "아이템 이미지" : "http://ddragon.leagueoflegends.com/cdn/10.18.1/img/item/1001.png",
+  "룬 리스트": "https://ddragon.leagueoflegends.com/cdn/10.18.1/data/ko_KR/runesReforged.json",
+  "대표 룬 이미지": "http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/{rune name}.png",
+  "세부 룬 이미지": "http://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/{main type}/{sub name}/{sub name}.png",
+  "match에서 role, lane 정보": [
+    {
+      "lane": "MID",
+      "role": "SOLO",
+      "역할": "미드"
+    },
+    {
+      "lane": "TOP",
+      "role": "SOLO",
+      "역할": "탑"
+    },
+    {
+      "lane": "JUNGLE",
+      "role": "NONE",
+      "역할": "정글"
+    },
+    {
+      "lane": "BOTTOM",
+      "role": "DUO_CARRY",
+      "역할": "원딜"
+    },
+    {
+      "lane": "BOTTOM",
+      "role": "DUO_SUPPORT",
+      "역할": "서포터"
+    }
+  ]
+}
