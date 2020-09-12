@@ -5,13 +5,13 @@
             "X-Riot-Token": "내 토큰"
         },
         "body": {
-            "id": "FifZ0AS5L5031HYKdfZqCV0ylD_nLeQPwplOddnhBNPMZw",
-            "accountId": "G_ZzE3jPPCjhbSDKr1P6r0kofIAylItUHHeFot8jjeA",
-            "puuid": "6YcBFP87fJk0CPwz8HcCz42lhlaTCLu0bU7OG5DS52Q4_8bUg3vdupEl_Pq4-5rE3Ba3GPPmwrzH_g",
-            "name": "쥬니니",
-            "profileIconId": 4657,
-            "revisionDate": 1599461469000,
-            "summonerLevel": 81
+            "id": "string. Encrypted summoner ID",
+            "accountId": "string. Encrypted account ID",
+            "puuid": "string. Encrypted PUUID",
+            "name": "string. Summoner name",
+            "profileIconId": "int. icon id",
+            "revisionDate": "long. modified date. ex) name, level, profile, icon change",
+            "summonerLevel": "int. level"
         }
     },
     "게임 내역 api": {
@@ -19,7 +19,7 @@
         "params (optional)": {
             "champion": "int",
             "queue": "int -> http://static.developer.riotgames.com/docs/lol/queues.json",
-            "season": "int",
+            "season": "int. [DEPERECATED]",
             "endTime": "long (milliseconds)",
             "beginTime": "long (milliseconds)",
             "endIndex": "int (maximum: beginIndex + 100)",
@@ -31,19 +31,19 @@
         "body": {
             "matches": [
                 {
-                    "platformId": "KR",
-                    "gameId": 4630822956,
-                    "champion": 6,
-                    "queue": 430,
-                    "season": 13,
-                    "timestamp": 1599484479180,
-                    "role": "DUO_CARRY",
-                    "lane": "BOTTOM"
+                    "platformId": "string. KR",
+                    "gameId": "long",
+                    "champion": "int",
+                    "queue": "int -> http://static.developer.riotgames.com/docs/lol/queues.json",
+                    "season": "int",
+                    "timestamp": "long. unix timestamp milliseconds",
+                    "role": "string",
+                    "lane": "string"
                 }
             ],
-            "startIndex": 0,
-            "endIndex": 1,
-            "totalGames": 129
+            "startIndex": "int",
+            "endIndex": "int",
+            "totalGames": "int. 정확하지 않을 수도 있다고 함. pagenation 할 수 있도록 보내주는 용도라고 함"
         }
     },
     "게임 내용 api": {
@@ -52,10 +52,10 @@
             "X-Riot-Token": "내 토큰"
         },
         "body": {
-            "gameId": "int. 게임ID",
+            "gameId": "long. 게임ID",
             "platformId": "string. KR",
             "gameCreation": "long. 게임 생성 시간 unix time",
-            "gameDuration": "int. 게임 진행 시간 초",
+            "gameDuration": "long. 게임 진행 시간 초",
             "queueId": "int. 게임 형식",
             "mapId": "int. 맵 id",
             "seasonId": "int. 시즌",
@@ -64,73 +64,78 @@
             "gameType": "string. 게임타입. MATCHED_GAME",
             "teams": [
                 {
-                    "teamId": "int. 100: blue, 200: red",
-                    "win": "string. Win or Fail",
-                    "firstBlood": "boolean. 퍼블",
-                    "firstTower": "boolean. 첫 타워 철거",
+                    "teamId": "int. 100 for blue side. 200 for red side.",
+                    "win": "string. 'Win', 'Fail'",
+                    "firstBlood": "boolean.",
+                    "firstTower": "boolean.",
                     "firstInhibitor": "boolean. 첫 억제기 철거",
-                    "firstBaron": "boolean. 첫 바론 킬",
-                    "firstDragon": "boolean. 첫 용",
+                    "firstBaron": "boolean.",
+                    "firstDragon": "boolean.",
                     "firstRiftHerald": "boolean. 첫 전령",
-                    "towerKills": "int. 타워 철거 갯수",
+                    "towerKills": "int.",
                     "inhibitorKills": "int. 억제기 철거 갯수",
-                    "baronKills": "int. 바론 갯수",
-                    "dragonKills": "int. 용 갯수",
-                    "vilemawKills": "int. 뒤틀린숲에 뭐시기...",
+                    "baronKills": "int.",
+                    "dragonKills": "int.",
+                    "vilemawKills": "int. 뒤틀린숲에 뭐시기... 안씀",
                     "riftHeraldKills": "int. 전령 갯수",
-                    "dominionVictoryScore": "int. 점령전 모드 점수...",
-                    "bans": "int array. 밴 리스트"
+                    "dominionVictoryScore": "int. 점령전 모드 점수... 안씀",
+                    "bans": [
+                        {
+                            "championId": "int",
+                            "pickTurn": "int"
+                        }
+                    ]
                 }
             ],
             "participants": [
                 {
                     "participantId": "int. 참가자 번호",
-                    "teamId": "int. 100: 블루팀, 200: 레드팀",
-                    "championId": "int. 챔피언 인덱스",
-                    "spell1Id": "int. 스펠1 (d key",
-                    "spell2Id": "int. 스펠2 (f) key",
+                    "teamId": "int. 100 for blue side. 200 for red side.",
+                    "championId": "int.",
+                    "spell1Id": "int. summoner spell id (d)",
+                    "spell2Id": "int. summoner spell id (f)",
                     "stats": {
                         "participantId": "int. 참가자 번호",
-                        "win": "boolean. 승패",
-                        "item0": "int. 1번 item id",
-                        "item1": "int. 2번 item id",
-                        "item2": "int. 3번 item id",
-                        "item3": "int. 4번 item id",
-                        "item4": "int. 5번 item id",
-                        "item5": "int. 6번 item id",
-                        "item6": "int. 와드 item id",
+                        "win": "boolean. 'Win', 'Fail'",
+                        "item0": "int. item1 id (num 1)",
+                        "item1": "int. item2 id (num 2)",
+                        "item2": "int. item3 id (num 3)",
+                        "item3": "int. item4 id (num 5)",
+                        "item4": "int. item5 id (num 6)",
+                        "item5": "int. item6 id (num 7)",
+                        "item6": "int. ward item id (num 4)",
                         "kills": "int. 킬",
                         "deaths": "int. 데스",
                         "assists": "int. 어시",
-                        "largestKillingSpree": 0,
-                        "largestMultiKill": 1,
-                        "killingSprees": 0,
+                        "largestKillingSpree": "int",
+                        "largestMultiKill": "int",
+                        "killingSprees": "int",
                         "longestTimeSpentLiving": "int. 안죽고 살았던 최대 시간",
                         "doubleKills": "int. 더블킬 횟수",
                         "tripleKills": "int. 트리플킬 횟수",
                         "quadraKills": "int. 쿼드라킬 횟수",
                         "pentaKills": "int. 펜타킬 횟수",
                         "unrealKills": "int. 레전더리 킬 횟수",
-                        "totalDamageDealt": "int. 총 입힌 데미지",
-                        "magicDamageDealt": "int. 입힌 마법 데미지",
-                        "physicalDamageDealt": "int. 입힌 물리 데미지",
-                        "trueDamageDealt": "int. 입힌 트루뎀",
-                        "largestCriticalStrike": "int. 최대 크리티컬 데미지",
-                        "totalDamageDealtToChampions": "int. 챔피언에게 입힌 총 데미지",
-                        "magicDamageDealtToChampions": "int. 챔피언에게 입힌 마법 데미지",
-                        "physicalDamageDealtToChampions": "int. 챔피언에게 입힌 물리 데미지",
-                        "trueDamageDealtToChampions": "int. 챔피언에게 입힌 트루뎀",
-                        "totalHeal": "int. 총 힐량",
-                        "totalUnitsHealed": "int. 힐 해준 유닛 수",
-                        "damageSelfMitigated": "int. 피해 자체 완화",
-                        "damageDealtToObjectives": "int. 오브젝트 몹에게 입힌 데미지",
-                        "damageDealtToTurrets": "int. 타워에 가한 데미지",
-                        "visionScore": "int. 시야점수",
-                        "timeCCingOthers": "int. CC기를 가한 시간",
-                        "totalDamageTaken": "int. 총 받은 데미지",
-                        "magicalDamageTaken": "int. 받은 마법 데미지",
-                        "physicalDamageTaken": "int. 받은 물리 데미지",
-                        "trueDamageTaken": "int. 받은 트루뎀",
+                        "totalDamageDealt": "long. 총 입힌 데미지",
+                        "magicDamageDealt": "long. 입힌 마법 데미지",
+                        "physicalDamageDealt": "long. 입힌 물리 데미지",
+                        "trueDamageDealt": "long. 입힌 트루뎀",
+                        "largestCriticalStrike": "long. 최대 크리티컬 데미지",
+                        "totalDamageDealtToChampions": "long. 챔피언에게 입힌 총 데미지",
+                        "magicDamageDealtToChampions": "long. 챔피언에게 입힌 마법 데미지",
+                        "physicalDamageDealtToChampions": "long. 챔피언에게 입힌 물리 데미지",
+                        "trueDamageDealtToChampions": "long. 챔피언에게 입힌 트루뎀",
+                        "totalHeal": "long. 총 힐량",
+                        "totalUnitsHealed": "long. 힐 해준 유닛 수",
+                        "damageSelfMitigated": "long. 피해 자체 완화",
+                        "damageDealtToObjectives": "long. 오브젝트 몹에게 입힌 데미지",
+                        "damageDealtToTurrets": "long. 타워에 가한 데미지",
+                        "visionScore": "long. 시야점수",
+                        "timeCCingOthers": "long. CC기 당한 시간",
+                        "totalDamageTaken": "long. 총 받은 데미지",
+                        "magicalDamageTaken": "long. 받은 마법 데미지",
+                        "physicalDamageTaken": "long. 받은 물리 데미지",
+                        "trueDamageTaken": "long. 받은 트루뎀",
                         "goldEarned": "int. 획득 골드",
                         "goldSpent": "int. 사용 골드",
                         "turretKills": "int. 철거한 타워 수",
@@ -139,7 +144,7 @@
                         "neutralMinionsKilled": "int. 정글몹 cs",
                         "neutralMinionsKilledTeamJungle": "int. 우리팀 정글몹 cs",
                         "neutralMinionsKilledEnemyJungle": "int. 적팀 정글몹 cs",
-                        "totalTimeCrowdControlDealt": "int. CC기 걸린 총 시간",
+                        "totalTimeCrowdControlDealt": "int. CC기 가한 총 시간",
                         "champLevel": "int. 레벨",
                         "visionWardsBoughtInGame": "int. 핑와 구매 갯수",
                         "sightWardsBoughtInGame": "int. 시야와드 구매 갯수 (이제 안씀)",
@@ -165,30 +170,30 @@
                         "playerScore7": 0,
                         "playerScore8": 0,
                         "playerScore9": 0,
-                        "perk0": "int. 주력 룬 인덱스",
-                        "perk0Var1": "int. 발동 횟수",
-                        "perk0Var2": "int. 발동하여 적립된 수치",
-                        "perk0Var3": 0,
+                        "perk0": "int. 주력 룬 인덱스. ex) 집중공격, 포식자, 여진 등...",
+                        "perk0Var1": "int.",
+                        "perk0Var2": "int.",
+                        "perk0Var3": "int.",
                         "perk1": "int. 메인 룬 1",
-                        "perk1Var1": 407,
-                        "perk1Var2": 0,
-                        "perk1Var3": 0,
+                        "perk1Var1": "int.",
+                        "perk1Var2": "int.",
+                        "perk1Var3": "int.",
                         "perk2": "int. 메인 룬 2",
-                        "perk2Var1": 18,
-                        "perk2Var2": 0,
-                        "perk2Var3": 0,
+                        "perk2Var1": "int.",
+                        "perk2Var2": "int.",
+                        "perk2Var3": "int.",
                         "perk3": "int. 메인 룬 3",
-                        "perk3Var1": 16,
-                        "perk3Var2": 5,
-                        "perk3Var3": 0,
+                        "perk3Var1": "int.",
+                        "perk3Var2": "int.",
+                        "perk3Var3": "int.",
                         "perk4": "int. 서브 룬 1",
-                        "perk4Var1": 797,
-                        "perk4Var2": 380,
-                        "perk4Var3": 0,
+                        "perk4Var1": "int.",
+                        "perk4Var2": "int.",
+                        "perk4Var3": "int.",
                         "perk5": "int. 서브 룬 2",
-                        "perk5Var1": 11,
-                        "perk5Var2": 20,
-                        "perk5Var3": 0,
+                        "perk5Var1": "int.",
+                        "perk5Var2": "int.",
+                        "perk5Var3": "int.",
                         "perkPrimaryStyle": "int. 메인 룬 인덱스",
                         "perkSubStyle": "int. 서브 룬 인덱스",
                         "statPerk0": "int. 고정룬 1",
@@ -196,58 +201,58 @@
                         "statPerk2": "int. 고정룬 3"
                     },
                     "timeline": {
-                        "participantId": 1,
+                        "participantId": "int",
                         "creepsPerMinDeltas": {
-                            "10-20": 1.6,
-                            "0-10": 0,
-                            "30-end": 1.6,
-                            "20-30": 0,
-                            "설명": "분당 라인 미니언 cs"
+                            "10-20": "double",
+                            "0-10": "double",
+                            "30-end": "double",
+                            "20-30": "double",
+                            "설명": "Map[String, double]. 미니언 cs"
                         },
                         "xpPerMinDeltas": {
                             "10-20": 458.4,
                             "0-10": 344.20000000000005,
                             "30-end": 703.2,
                             "20-30": 412.70000000000005,
-                            "설명": "분당 획득 경험치"
+                            "설명": "Map[String, double]. 획득 경험치"
                         },
                         "goldPerMinDeltas": {
                             "10-20": 361,
                             "0-10": 327.2,
                             "30-end": 455.2,
                             "20-30": 361.8,
-                            "설명": "분당 획득 골드"
+                            "설명": "Map[String, double]. 획득 골드"
                         },
                         "csDiffPerMinDeltas": {
                             "10-20": 0.5,
                             "0-10": -0.7,
                             "30-end": -0.19999999999999996,
                             "20-30": -1.1,
-                            "설명": "상대팀 동일 포지션과 분당 cs 차이"
+                            "설명": "Map[String, double]. 상대팀과 cs 스코어 차이"
                         },
                         "xpDiffPerMinDeltas": {
                             "10-20": 102.4,
                             "0-10": 39.400000000000034,
                             "30-end": 385.80000000000007,
                             "20-30": -172.2,
-                            "설명": "상대팀 동일 포지션과 분당 경험치 차이"
+                            "설명": "Map[String, double]. 상대팀과 경험치 스코어 차이"
                         },
                         "damageTakenPerMinDeltas": {
                             "10-20": 725.2,
                             "0-10": 513.4,
                             "30-end": 892.4,
                             "20-30": 1027.3000000000002,
-                            "설명": "상대팀 동일 포지션과 분당 받은 데미지 차이"
+                            "설명": "Map[String, double]. 받은 데미지"
                         },
                         "damageTakenDiffPerMinDeltas": {
                             "10-20": 30.5,
                             "0-10": -202.90000000000003,
                             "30-end": -522.0000000000001,
                             "20-30": -51.39999999999998,
-                            "설명": "상대팀 동일 포지션과 분당 입힌 데미지 차이"
+                            "설명": "Map[String, double]. 상대팀과 입힌 데미지 스코어 차이"
                         },
-                        "role": "string. lane과 합쳐서 포지션 배정",
-                        "lane": "string. role과 합쳐서 포지션 배정"
+                        "role": "string. Participant's calculated role. (Legal values: DUO, NONE, SOLO, DUO_CARRY, DUO_SUPPORT)",
+                        "lane": "string. Participant's calculated lane. MID and BOT are legacy values. (Legal values: MID, MIDDLE, TOP, JUNGLE, BOT, BOTTOM)"
                     }
                 }
             ],
@@ -260,7 +265,7 @@
                         "summonerName": "string. 닉네임",
                         "summonerId": "string. id",
                         "currentPlatformId": "string. KR",
-                        "currentAccountId": "string. accountid",
+                        "currentAccountId": "string. 당시의 accountid",
                         "matchHistoryUri": "string. 안씀...",
                         "profileIcon": "int. profile icon index"
                     }
@@ -273,6 +278,59 @@
         "headers": {
             "X-Riot-Token": "내 토큰"
         },
-        "힘들다": "이건 나중에 생각해봐야겠다. 게임 내용이 10분 간격으로 쪼개져서 나오는데, 발생한 이벤트들이 전부 표시된다."
+        "body": {
+            "frames": [
+                {
+                    "participantFrames": {
+                        "1": {
+                            "participantId": "플레이어 번호",
+                            "position": {
+                                "x": "int. x축 좌표",
+                                "y": "int. y축 좌표"
+                            },
+                            "currentGold": "int",
+                            "totalGold": "int",
+                            "level": "int",
+                            "xp": "int",
+                            "minionsKilled": "int",
+                            "jungleMinionsKilled": "int",
+                            "dominionScore": "int. 안씀",
+                            "teamScore": "int"
+                        },
+                        "설명": "Map[String, MatchParticipantFrameDto]"
+                    },
+                    "events": {
+                        "laneType": "string. BOT_LANE, MID_LANE, TOP_LANE",
+                        "skillSlot": "int. type: SKILL_LEVEL_UP 시. 1, 2, 3, 4 중에 어떤거 올렸는지",
+                        "ascendedType": "string. ??",
+                        "creatorId": "int. 행위자 플레이어 번호. (와드 이벤트시)",
+                        "afterId": "int. type: ITEM_UNDO 시. 되돌린 아이템 id.",
+                        "eventType": "string. ??",
+                        "type": "string. (Legal values: CHAMPION_KILL, WARD_PLACED, WARD_KILL, BUILDING_KILL, ELITE_MONSTER_KILL, ITEM_PURCHASED, ITEM_SOLD, ITEM_DESTROYED, ITEM_UNDO, SKILL_LEVEL_UP, ASCENDED_EVENT, CAPTURE_POINT, PORO_KING_SUMMON)",
+                        "levelUpType": "string. NORMAL 밖에 안보이는데?",
+                        "wardType": "string. type: WARD_PLACED, WARD_KILL 시. UNDEFINED, YELLOW_TRINKET, CONTROL_WARD, SIGHT_WARD",
+                        "participantId": "int. 행위자 플레이어 번호",
+                        "towerType": "string. BASE_TURRET. OUTER_TURRET. INNER_TURRET, NEXUS_TURRET, UNDEFINED_TURRET",
+                        "itemId": "int",
+                        "beforeId": "int. type: ITEM_UNDO 시. 되돌리기 전 아이템 id.",
+                        "pointCaptured": "string. ??",
+                        "monsterType": "string. type: ELITE_MONSTER_KILL시. DRAGON, RIFTHERALD, BARON_NASHOR",
+                        "monsterSubType": "string, WATER_DRAGON, AIR_DRAGON, FIRE_DRAGON",
+                        "teamId": "int. 100(blue), 200(red)",
+                        "position": {
+                            "x": "int",
+                            "y": "int"
+                        },
+                        "killerId": "int. 죽인사람 플레이어 번호",
+                        "victimId": "int. 죽은사람 플레이어 번호",
+                        "timestamp": "long. / 60000 하면 분 나옴",
+                        "assistingParticipantIds": "List[int]. 어시 딴 사람 플레이어 번호 array",
+                        "buildingType": "string. INHIBITOR_BUILDING, TOWER_BUILDING"
+                    },
+                    "timestamp": "long. / 60000 하면 분 나옴"
+                }
+            ],
+            "frameInterval": "long. 60000. 1분 간격"
+        }
     }
 }
